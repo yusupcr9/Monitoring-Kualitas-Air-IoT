@@ -9,7 +9,7 @@
 
 FirebaseData firebaseData;
 
-float nilai_turbid, nilai_ph;
+float nilai_turbid, nilai_ph, nilai_tds;
 
 String answer, data[4];
 void setup() {
@@ -59,13 +59,15 @@ void loop() {
   Serial.println("=======================================");
   Serial.println("NTU : " + data[1]);
   Serial.println("PH : " + data[2]);
-  Serial.println("DATA 3 : " + data[3]);
+  Serial.println("TDS : " + data[3]);
   Serial.println("=======================================");
 
   int nilai_ntu = data[1].toFloat();
+  int nilai_tds = data[3].toFloat();
   FirebaseJson json;
   json.set("turbidity", nilai_ntu);
   json.set("ph", data[2].toFloat());
+  json.set("tds", nilai_tds);
   if (Firebase.setJSON(firebaseData, "/", json))
   {
     Serial.println("PASSED");
